@@ -27,11 +27,27 @@ class Play_list_download(QThread):
 
         self.download_progress = True
 
+    def msg_exec(self , title , text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle(str(title))
+        msg.setText(str(text))
+        msg.setIcon(QMessageBox.Critical)
+        msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
+        msg.exec_()
+
     def run(self):
         msg2 = QtWidgets.QMessageBox()
         try :
             video_url = self.play_list_url
-            video_url = YouTube(self.play_list_url)
+            try :
+                video_url = YouTube(self.play_list_url)
+            except Exception as link_error :
+                print(link_error)
+                # try :
+                #     Play_list_download().msg_exec("Warning" ," invalid URL ! " )
+                # except Exception as g :
+                #     print(g)
+
             if self.video_type == "MP3":
                 video = video_url.streams.filter(only_audio=True).first()
             else:
@@ -74,12 +90,16 @@ class Play_list_download(QThread):
             self.download_complete.emit()
         except Exception as d :
             print("xxxxxxxxffffffffx",d)
-            try :
-                msg2.setWindowTitle("Warning")
-                msg2.setText("Invalid URLss !")
-                msg2.exec_()
-            except Exception as msg_error  :
-                print(msg_error)
+            # try :
+            #     Play_list_download().msg_exec("Warning" ," Invalid URL ! " )
+            # except Exception as g :
+            #     print(g)
+            # try :
+            #     msg2.setWindowTitle("Warning")
+            #     msg2.setText("Invalid URLss !")
+            #     msg2.exec_()
+            # except Exception as msg_error  :
+            #     print(msg_error)
 
 class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
     # checkAcceptedSignal = QtCore.pyqtSignal()
@@ -104,6 +124,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
             if len(self.link_lin.text()) >8 :
                 if self.path_lbl.text() != "Select Path ........." :
                     try :
+                        self.progressBar.setValue(0)
                         self.Play_List.video_type =  self.type_compobox.currentText()
                         self.Play_List.download_progress = True
                         self.Play_List.play_list_url = self.link_lin.text()
@@ -185,16 +206,16 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
             self.tableWidget.setRowCount(0)
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
-            self.tableWidget.setItem(self.counter, 0, QTableWidgetItem(str(self.Play_List.video_name)))
-            self.tableWidget.setItem(self.counter, 1, QTableWidgetItem(str(self.Play_List.video_description)))
-            self.tableWidget.setItem(self.counter, 2, QTableWidgetItem(str(self.Play_List.video_status)))
-            self.counter +=1
+            self.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.Play_List.video_name)))
+            self.tableWidget.setItem(0, 1, QTableWidgetItem(str(self.Play_List.video_description)))
+            self.tableWidget.setItem(0, 2, QTableWidgetItem(str(self.Play_List.video_status)))
+
         except Exception as T :
             print(T)
     def update_status(self):
-        if self.counter != 0 :
-            self.tableWidget.setItem(self.counter-1 , 2, QTableWidgetItem(str(self.Play_List.video_status)))
+        self.tableWidget.setItem(0 , 2, QTableWidgetItem(str(self.Play_List.video_status)))
         self.progressBar.setValue(self.Play_List.progress_value)
+
 
     def select_path_to_save(self):
         self.filepath_to_save = QFileDialog.getExistingDirectory(self, 'Hey! Select a path', "E:\\")
