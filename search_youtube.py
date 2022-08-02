@@ -1,6 +1,6 @@
 from pytube import Search
 
-s = Search(' الاستثمار')
+s = Search(' apocalypse')
 for v in s.results:
   print(f"{v.title}\n{v.watch_url}\n")
 
