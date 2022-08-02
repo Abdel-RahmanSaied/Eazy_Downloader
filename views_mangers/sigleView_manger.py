@@ -32,23 +32,28 @@ class Play_list_download(QThread):
         try :
             video_url = self.play_list_url
             video_url = YouTube(self.play_list_url)
-            video = video_url.streams.filter(only_audio=True).first()
+            if self.video_type == "MP3":
+                video = video_url.streams.filter(only_audio=True).first()
+            else:
+                video = video_url.streams.filter(progressive=True, file_extension='mp4').get_highest_resolution()
+                #video.get_highest_resolution()
             self.video_name = video_url.title
             self.video_description = video_url.description
             self.video_status = "In Progress .... "
             self.update_values_signal.emit()
 
             out_file = video.download(output_path=self.download_path)
-            base, ext = os.path.splitext(out_file)
-            new_file = base + '.mp3'
-            counter = 2
-            while True  :
-                if os.path.exists(new_file) == True:
-                    new_file = base+"-"+str(counter) + '.mp3'
-                    counter+=1
-                else:
-                    break
-            os.rename(out_file, new_file )
+            if self.video_type == "MP3":
+                base, ext = os.path.splitext(out_file)
+                new_file = base + '.mp3'
+                counter = 2
+                while True  :
+                    if os.path.exists(new_file) == True:
+                        new_file = base+"-"+str(counter) + '.mp3'
+                        counter+=1
+                    else:
+                        break
+                os.rename(out_file, new_file )
 
             self.video_status = " Downloded "
             self.progress_value = 100
