@@ -103,7 +103,7 @@ QPushButton:hover {
          <property name="font">
           <font>
            <family>Acumin Pro</family>
-           <pointsize>12</pointsize>
+           <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -186,13 +186,13 @@ QPushButton:hover {
          <property name="font">
           <font>
            <family>Acumin Pro</family>
-           <pointsize>12</pointsize>
+           <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
          <property name="text">
-          <string>Download sigle video</string>
+          <string>Download single video</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -269,7 +269,7 @@ QPushButton:hover {
          <property name="font">
           <font>
            <family>Acumin Pro</family>
-           <pointsize>12</pointsize>
+           <pointsize>10</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>

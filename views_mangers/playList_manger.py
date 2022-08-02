@@ -164,7 +164,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
         self.start_download = True
         self.stop_download = False
 
-        msg.setWindowTitle("Warning")
+        msg.setWindowTitle("Successfully")
         msg.setText("Download Finished !")
         msg.setIcon(QMessageBox.Information)
         msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
@@ -172,6 +172,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
 
     def update_Labels(self):
         try :
+            self.tableWidget.setRowCount(0)
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
             self.tableWidget.setItem(self.counter, 0, QTableWidgetItem(str(self.Play_List.video_name)))

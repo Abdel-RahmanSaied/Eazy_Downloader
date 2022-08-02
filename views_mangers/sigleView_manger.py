@@ -54,6 +54,17 @@ class Play_list_download(QThread):
                     else:
                         break
                 os.rename(out_file, new_file )
+            if self.video_type == "MP4":
+                base, ext = os.path.splitext(out_file)
+                new_file = base + '.mp4'
+                counter = 2
+                while True:
+                    if os.path.exists(new_file) == True:
+                        new_file = base + "-" + str(counter) + '.mp4'
+                        counter += 1
+                    else:
+                        break
+                os.rename(out_file, new_file)
 
             self.video_status = " Downloded "
             self.progress_value = 100
@@ -163,7 +174,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         self.start_download = True
         self.stop_download = False
 
-        msg.setWindowTitle("Warning")
+        msg.setWindowTitle("Successfully ")
         msg.setText("Download Finished !")
         msg.setIcon(QMessageBox.Information)
         msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
@@ -171,6 +182,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
 
     def update_Labels(self):
         try :
+            self.tableWidget.setRowCount(0)
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
             self.tableWidget.setItem(self.counter, 0, QTableWidgetItem(str(self.Play_List.video_name)))
