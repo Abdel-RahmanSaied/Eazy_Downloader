@@ -17,7 +17,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Eazy Downloader</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="app_resources.qrc">
+    <normaloff>:/icons/images/logo.ico</normaloff>:/icons/images/logo.ico</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="3" column="0">

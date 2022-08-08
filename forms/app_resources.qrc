@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>images/logo.ico</file>
     <file>images/Untitled-2.png</file>
     <file>images/icons8-back-67.png</file>
     <file>images/icons8-search-50.png</file>

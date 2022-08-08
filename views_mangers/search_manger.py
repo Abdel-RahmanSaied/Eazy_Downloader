@@ -13,6 +13,10 @@ class SearchManager(QtWidgets.QWidget, search_view.Ui_Form):
         self.search_btn.clicked.connect(self.run)
     def run(self):
         msg = QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        msg.setWindowIcon(icon)
+
         if len(self.link_lin.text()) != 0 :
             self.tableWidget.setRowCount(0)
             rowPosition = self.tableWidget.rowCount()
@@ -41,3 +45,4 @@ if __name__ == "__main__":
 # header = self.tableWidget.horizontalHeader()
 # header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 # header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+

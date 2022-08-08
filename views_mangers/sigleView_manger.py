@@ -115,8 +115,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         self.Play_List.update_values_signal.connect(self.update_Labels)
         self.counter = 0
         self.Play_List.downloaded_signal.connect(self.update_status)
-        self.pushButton.clicked.connect(self.about_me)
-
+        # self.pushButton.clicked.connect(self.about_me)
 
     def start_download(self):
         msg = QtWidgets.QMessageBox()
@@ -185,6 +184,10 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
 
     def download_finished(self):
         msg = QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        msg.setWindowIcon(icon)
+
         self.download_btn.setText("Start Download")
         self.download_btn.setStyleSheet('''
                                     font: 14pt "Acumin Pro";
@@ -224,15 +227,6 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         else:
             self.path_lbl.setText("Select Path .........")
 
-    def about_me(self):
-        msg = QtWidgets.QMessageBox()
-        msg.setWindowTitle(" About Us ")
-        msg.setText(" Developed by : Abdel-Rahman Saied \n  Email : abdelrahmansaied080@gmail.com")
-        # msg.about()
-        msg.setIcon(QMessageBox.Information)
-        msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
-        msg.exec_()
-
 
 if __name__ == "__main__":
     import qdarkstyle
@@ -243,6 +237,6 @@ if __name__ == "__main__":
     app.exec_()
 
 # header = self.tableWidget.horizontalHeader()
-# header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+# header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 # header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 # header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)

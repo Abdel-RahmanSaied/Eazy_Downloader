@@ -28,6 +28,10 @@ class Play_list_download(QThread):
 
     def get_play_list(self, playList):
         msg= QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        msg.setWindowIcon(icon)
+
         try :
             p_url = Playlist(playList)
         except Exception as url_error :
@@ -35,7 +39,7 @@ class Play_list_download(QThread):
         return p_url
 
     def run(self):
-        msg2 = QtWidgets.QMessageBox()
+
         try :
             play_list = Play_list_download().get_play_list(self.play_list_url)
             playlist_length = len(play_list.videos)
@@ -63,12 +67,7 @@ class Play_list_download(QThread):
                 self.download_complete.emit()
         except Exception as d :
             print("xxxxxxxxffffffffx",d)
-            try :
-                msg2.setWindowTitle("Warning")
-                msg2.setText("Invalid URLss !")
-                msg2.exec_()
-            except Exception as msg_error  :
-                print(msg_error)
+
 
 class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
     # checkAcceptedSignal = QtCore.pyqtSignal()
@@ -84,11 +83,14 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
         self.Play_List.update_values_signal.connect(self.update_Labels)
         self.counter = 0
         self.Play_List.downloaded_signal.connect(self.update_status)
-        self.pushButton.clicked.connect(self.about_me)
+
 
 
     def start_download(self):
         msg = QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        msg.setWindowIcon(icon)
         if self.start_download  == True :
             if len(self.link_lin.text()) >8 :
                 if self.path_lbl.text() != "Select Path ........." :
@@ -154,6 +156,10 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
 
     def download_finished(self):
         msg = QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        msg.setWindowIcon(icon)
+
         self.download_btn.setText("Start Download")
         self.download_btn.setStyleSheet('''
                                     font: 14pt "Acumin Pro";
@@ -193,14 +199,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
         else:
             self.path_lbl.setText("Select Path .........")
 
-    def about_me(self):
-        msg = QtWidgets.QMessageBox()
-        msg.setWindowTitle(" About Us ")
-        msg.setText(" Developed by : Abdel-Rahman Saied \n  Email : abdelrahmansaied080@gmail.com")
-        # msg.about()
-        msg.setIcon(QMessageBox.Information)
-        msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
-        msg.exec_()
+
 
 
 if __name__ == "__main__":
@@ -212,6 +211,6 @@ if __name__ == "__main__":
     app.exec_()
 
 # header = self.tableWidget.horizontalHeader()
-# header.setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
+# header.setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
 # header.setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 # header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
