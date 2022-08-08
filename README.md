@@ -23,6 +23,7 @@
 ```pip
    -> pip install PyQt5
    -> pip install QDarkStyle
+   -> pip install pytube
 ```
     
 ## Features
