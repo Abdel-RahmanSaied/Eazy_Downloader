@@ -85,7 +85,6 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
         self.Play_List.downloaded_signal.connect(self.update_status)
 
 
-
     def start_download(self):
         msg = QtWidgets.QMessageBox()
         icon = QtGui.QIcon()
@@ -178,7 +177,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
 
     def update_Labels(self):
         try :
-            self.tableWidget.setRowCount(0)
+            self.tableWidget.setRowCount(self.counter)
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
             self.tableWidget.setItem(self.counter, 0, QTableWidgetItem(str(self.Play_List.video_name)))
@@ -198,8 +197,6 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
             self.path_lbl.setText(self.filepath_to_save)
         else:
             self.path_lbl.setText("Select Path .........")
-
-
 
 
 if __name__ == "__main__":
