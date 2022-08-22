@@ -69,13 +69,3 @@ if __name__ == "__main__":
     w.show()
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     app.exec_()
-
-
-
-
-
-
-
-
-
-
