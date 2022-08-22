@@ -12,6 +12,7 @@ class MainManager(QtWidgets.QWidget, main_view.Ui_Form):
         self.setupUi(self)
 
 
+
 if __name__ == "__main__":
     import qdarkstyle
     app = QtWidgets.QApplication([])
