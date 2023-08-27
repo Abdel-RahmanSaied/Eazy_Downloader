@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>images/logo.ico</file>
+    <file>icons/searching.png</file>
+    <file>images/Untitled-2.png</file>
+    <file>images/icons8-back-67.png</file>
+    <file>images/icons8-search-50.png</file>
+    <file>icons/icons8-search-50.png</file>
+    <file>images/icons8-download-64 (1).png</file>
+    <file>images/icons8-download-64.png</file>
+    <file>images/icons8.png</file>
+    <file>icons/list.png</file>
+    <file>images/question.png</file>
+    <file>images/down.png</file>
+  </qresource>
+</RCC>
