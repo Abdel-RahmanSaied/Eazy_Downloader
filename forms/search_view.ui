@@ -164,36 +164,7 @@
       <item row="4" column="0">
        <widget class="QTableWidget" name="tableWidget">
         <property name="styleSheet">
-         <string notr="true">QTableView {
-    background-color: transparent;
-    border: none;
-    border-radius: 10px;
-}
-
-QTableView::item {
-	color: #36393F;
-    padding: 2px;
-    border-bottom: 1px solid #BDBDBD;
-    gridline-color: #36393F;
-    gridline-width: 2px;
-    gridline-style: dotted;
-}
-
-QTableView::item:selected {
-    background-color: #F5F5F5;
-    color: #36393F;
-}
-
-QHeaderView {
-    background-color: transparent;
-    color: black;
-	
-}
-QTableView::item[text=null] {
-     display: none;
-}
-
-</string>
+         <string notr="true">background-color: rgb(255, 255, 255, 0);</string>
         </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>

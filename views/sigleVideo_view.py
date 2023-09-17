@@ -72,36 +72,7 @@ class Ui_Form(object):
         self.gridLayout = QtWidgets.QGridLayout(self.frame)
         self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(self.frame)
-        self.tableWidget.setStyleSheet("QTableView {\n"
-"    background-color: transparent;\n"
-"    border: none;\n"
-"    border-radius: 10px;\n"
-"}\n"
-"\n"
-"QTableView::item {\n"
-"    color: #36393F;\n"
-"    padding: 2px;\n"
-"    border-bottom: 1px solid #BDBDBD;\n"
-"    gridline-color: #36393F;\n"
-"    gridline-width: 2px;\n"
-"    gridline-style: dotted;\n"
-"}\n"
-"\n"
-"QTableView::item:selected {\n"
-"    background-color: #F5F5F5;\n"
-"    color: #36393F;\n"
-"}\n"
-"\n"
-"QHeaderView {\n"
-"    background-color: transparent;\n"
-"    color: black;\n"
-"    \n"
-"}\n"
-"QTableView::item[text=null] {\n"
-"     display: none;\n"
-"}\n"
-"\n"
-"")
+        self.tableWidget.setStyleSheet("background-color: rgb(255, 255, 255, 0);")
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.tableWidget.setColumnCount(3)
         self.tableWidget.setObjectName("tableWidget")
