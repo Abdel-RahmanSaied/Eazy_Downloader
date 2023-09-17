@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Eazy Downloader"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.3"
 #define MyAppPublisher "Abdel-Rahman Saied , Inc."
 #define MyAppURL "https://github.com/Abdel-RahmanSaied"
 #define MyAppExeName "Eazy Downloader.exe"
@@ -16,7 +16,7 @@
 AppId={{513AB24A-1362-4C7E-AE76-EB95A4D4C050}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
@@ -28,7 +28,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 OutputDir=E:\
 OutputBaseFilename=Eazy Downloader
-SetupIconFile=E:\projects\Eazy Downloader\logo.ico
+SetupIconFile=E:\@projects\Eazy Downloader\logo.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -40,7 +40,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "E:\projects\Eazy Downloader\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\@projects\Eazy Downloader\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

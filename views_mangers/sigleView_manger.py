@@ -10,6 +10,13 @@ from PyQt5.QtCore import QTimer, QThread, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import *
 
 
+def on_progress(stream, chunk, bytes_remaining):
+    total_size = stream.filesize
+    bytes_downloaded = total_size - bytes_remaining
+    percentage = (bytes_downloaded / total_size) * 100
+    print(f"Downloaded {bytes_downloaded} bytes out of {total_size} bytes ({percentage:.2f}%)")
+
+
 class Play_list_download(QThread):
     download_complete = pyqtSignal()
     update_values_signal = pyqtSignal()
@@ -41,7 +48,7 @@ class Play_list_download(QThread):
         try:
             video_url = self.play_list_url
             try:
-                video_url = YouTube(self.play_list_url)
+                video_url = YouTube(self.play_list_url, on_progress_callback=on_progress)
             except Exception as link_error:
                 print(link_error)
                 # try :
