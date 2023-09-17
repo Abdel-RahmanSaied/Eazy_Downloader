@@ -72,24 +72,47 @@ class Ui_Form(object):
         self.gridLayout = QtWidgets.QGridLayout(self.frame)
         self.gridLayout.setObjectName("gridLayout")
         self.tableWidget = QtWidgets.QTableWidget(self.frame)
-        self.tableWidget.setStyleSheet("background-color: rgb(170, 170, 255,0);")
+        self.tableWidget.setStyleSheet("QTableView {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QTableView::item {\n"
+"    color: #36393F;\n"
+"    padding: 2px;\n"
+"    border-bottom: 1px solid #BDBDBD;\n"
+"    gridline-color: #36393F;\n"
+"    gridline-width: 2px;\n"
+"    gridline-style: dotted;\n"
+"}\n"
+"\n"
+"QTableView::item:selected {\n"
+"    background-color: #F5F5F5;\n"
+"    color: #36393F;\n"
+"}\n"
+"\n"
+"QHeaderView {\n"
+"    background-color: transparent;\n"
+"    color: black;\n"
+"    \n"
+"}\n"
+"QTableView::item[text=null] {\n"
+"     display: none;\n"
+"}\n"
+"\n"
+"")
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(3)
+        self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
         self.gridLayout.addWidget(self.tableWidget, 3, 0, 1, 1)
         self.progressBar = QtWidgets.QProgressBar(self.frame)
         self.progressBar.setStyleSheet("background-color: rgb(0, 255, 255,0);")
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
         self.gridLayout.addWidget(self.progressBar, 4, 0, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.gridLayout.addItem(spacerItem2, 2, 0, 1, 1)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -220,12 +243,6 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Eazy Downloader"))
         self.label_4.setText(_translate("Form", "Youtube Video Downloader"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "File Name"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Description"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Status"))
         self.label.setText(_translate("Form", "Enter video link :"))
         self.link_lin.setPlaceholderText(_translate("Form", "Video Link"))
         self.label_3.setText(_translate("Form", "Video Type :"))

@@ -48,17 +48,16 @@ class Play_list_download(QThread):
             counter = 1
             while self.download_progress == True:
                 for video in play_list.videos:
-                    if self.download_progress == True:
+                    if self.download_progress:
                         self.video_name = video.title
                         self.video_description = video.description
                         self.video_status = "In Progress .... "
                         self.update_values_signal.emit()
 
-
                         filters = video.streams.filter(progressive=True, file_extension='mp4')
                         filters.get_highest_resolution().download(output_path=self.download_path)
                         # video.streams.first().download()
-                        self.video_status = " Downloded "
+                        self.video_status = " Downloaded "
                         self.progress_value = int(counter / playlist_length) * 100
                         self.downloaded_signal.emit()
                         counter += 1
@@ -90,6 +89,10 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
         self.counter = 0
         self.Play_List.downloaded_signal.connect(self.update_status)
 
+        table_headers = ["Video Name", "Video Description", "Status"]
+        self.tableWidget.setHorizontalHeaderLabels(table_headers)
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
     def start_download(self):
         msg = QtWidgets.QMessageBox()
         icon = QtGui.QIcon()
@@ -102,7 +105,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
                         self.Play_List.download_progress = True
                         self.Play_List.play_list_url = self.link_lin.text()
                         self.Play_List.download_path = self.path_lbl.text()
-                        print(self.Play_List.play_list_url)
+                        # print(self.Play_List.play_list_url)
                         if len(self.Play_List.play_list_url) > 32:
                             self.Play_List.start()
 
@@ -126,7 +129,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
                             except Exception as msg_error:
                                 print(msg_error)
                     except Exception as t:
-                        print("xxxxxxxxxx", t)
+                        print("Error in start download", t)
 
                 else:
                     msg.setWindowTitle("Warning")
@@ -143,7 +146,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
 
         elif self.stop_download:
             try:
-                print(self.Play_List.download_progress)
+                # print(self.Play_List.download_progress)
                 self.Play_List.download_progress = False
             except Exception as f:
                 print(f)
@@ -183,6 +186,7 @@ class PlayList_manger(QtWidgets.QWidget, playList_view.Ui_Form):
     def update_Labels(self):
         try:
             self.tableWidget.setRowCount(self.counter)
+
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
             self.tableWidget.setItem(self.counter, 0, QTableWidgetItem(str(self.Play_List.video_name)))

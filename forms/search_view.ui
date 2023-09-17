@@ -145,7 +145,76 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
+      <item row="2" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="4" column="0">
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="styleSheet">
+         <string notr="true">QTableView {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+QTableView::item {
+	color: #36393F;
+    padding: 2px;
+    border-bottom: 1px solid #BDBDBD;
+    gridline-color: #36393F;
+    gridline-width: 2px;
+    gridline-style: dotted;
+}
+
+QTableView::item:selected {
+    background-color: #F5F5F5;
+    color: #36393F;
+}
+
+QHeaderView {
+    background-color: transparent;
+    color: black;
+	
+}
+QTableView::item[text=null] {
+     display: none;
+}
+
+</string>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="dragDropOverwriteMode">
+         <bool>false</bool>
+        </property>
+        <property name="columnCount">
+         <number>2</number>
+        </property>
+        <column/>
+        <column/>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label">
@@ -255,7 +324,7 @@ padding-bottom:7px;</string>
         </item>
        </layout>
       </item>
-      <item row="1" column="0">
+      <item row="3" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <spacer name="horizontalSpacer_8">
@@ -301,37 +370,21 @@ padding-bottom:7px;</string>
         </item>
        </layout>
       </item>
-      <item row="2" column="0">
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
+      <item row="0" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-        <property name="tabKeyNavigation">
-         <bool>false</bool>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
         </property>
-        <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
         </property>
-        <property name="dragDropOverwriteMode">
-         <bool>false</bool>
-        </property>
-        <column>
-         <property name="text">
-          <string>Video name</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Link</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-       </widget>
+       </spacer>
       </item>
      </layout>
     </widget>

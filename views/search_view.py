@@ -71,6 +71,47 @@ class Ui_Form(object):
         self.frame.setObjectName("frame")
         self.gridLayout = QtWidgets.QGridLayout(self.frame)
         self.gridLayout.setObjectName("gridLayout")
+        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout.addItem(spacerItem2, 2, 0, 1, 1)
+        self.tableWidget = QtWidgets.QTableWidget(self.frame)
+        self.tableWidget.setStyleSheet("QTableView {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"}\n"
+"\n"
+"QTableView::item {\n"
+"    color: #36393F;\n"
+"    padding: 2px;\n"
+"    border-bottom: 1px solid #BDBDBD;\n"
+"    gridline-color: #36393F;\n"
+"    gridline-width: 2px;\n"
+"    gridline-style: dotted;\n"
+"}\n"
+"\n"
+"QTableView::item:selected {\n"
+"    background-color: #F5F5F5;\n"
+"    color: #36393F;\n"
+"}\n"
+"\n"
+"QHeaderView {\n"
+"    background-color: transparent;\n"
+"    color: black;\n"
+"    \n"
+"}\n"
+"QTableView::item[text=null] {\n"
+"     display: none;\n"
+"}\n"
+"\n"
+"")
+        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tableWidget.setTabKeyNavigation(False)
+        self.tableWidget.setProperty("showDropIndicator", False)
+        self.tableWidget.setDragDropOverwriteMode(False)
+        self.tableWidget.setColumnCount(2)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setRowCount(0)
+        self.gridLayout.addWidget(self.tableWidget, 4, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self.frame)
@@ -97,8 +138,8 @@ class Ui_Form(object):
         self.link_lin.setAlignment(QtCore.Qt.AlignCenter)
         self.link_lin.setObjectName("link_lin")
         self.horizontalLayout.addWidget(self.link_lin)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem2)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem3)
         self.search_btn = QtWidgets.QPushButton(self.frame)
         self.search_btn.setMinimumSize(QtCore.QSize(50, 50))
         self.search_btn.setMaximumSize(QtCore.QSize(50, 50))
@@ -117,11 +158,11 @@ class Ui_Form(object):
         self.search_btn.setIconSize(QtCore.QSize(30, 30))
         self.search_btn.setObjectName("search_btn")
         self.horizontalLayout.addWidget(self.search_btn)
-        self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem3)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem4)
         self.label_5 = QtWidgets.QLabel(self.frame)
         self.label_5.setStyleSheet("font: 20pt \"Acumin Pro\";\n"
 "\n"
@@ -130,24 +171,11 @@ class Ui_Form(object):
         self.label_5.setAlignment(QtCore.Qt.AlignCenter)
         self.label_5.setObjectName("label_5")
         self.horizontalLayout_5.addWidget(self.label_5)
-        spacerItem4 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem4)
-        self.gridLayout.addLayout(self.horizontalLayout_5, 1, 0, 1, 1)
-        self.tableWidget = QtWidgets.QTableWidget(self.frame)
-        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setTabKeyNavigation(False)
-        self.tableWidget.setProperty("showDropIndicator", False)
-        self.tableWidget.setDragDropOverwriteMode(False)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        self.gridLayout.addWidget(self.tableWidget, 2, 0, 1, 1)
+        spacerItem5 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem5)
+        self.gridLayout.addLayout(self.horizontalLayout_5, 3, 0, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
+        self.gridLayout.addItem(spacerItem6, 0, 0, 1, 1)
         self.gridLayout_2.addWidget(self.frame, 1, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -160,8 +188,4 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Enter Keyword :"))
         self.link_lin.setPlaceholderText(_translate("Form", "Keyword"))
         self.label_5.setText(_translate("Form", "Results"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Video name"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Link"))
 import app_resources_rc

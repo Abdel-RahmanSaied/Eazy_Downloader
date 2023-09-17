@@ -148,26 +148,46 @@
       <item row="3" column="0">
        <widget class="QTableWidget" name="tableWidget">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(170, 170, 255,0);</string>
+         <string notr="true">QTableView {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+QTableView::item {
+	color: #36393F;
+    padding: 2px;
+    border-bottom: 1px solid #BDBDBD;
+    gridline-color: #36393F;
+    gridline-width: 2px;
+    gridline-style: dotted;
+}
+
+QTableView::item:selected {
+    background-color: #F5F5F5;
+    color: #36393F;
+}
+
+QHeaderView {
+    background-color: transparent;
+    color: black;
+	
+}
+QTableView::item[text=null] {
+     display: none;
+}
+
+</string>
         </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
-        <column>
-         <property name="text">
-          <string>File Name</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Description</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Status</string>
-         </property>
-        </column>
+        <property name="columnCount">
+         <number>3</number>
+        </property>
+        <column/>
+        <column/>
+        <column/>
        </widget>
       </item>
       <item row="4" column="0">
@@ -184,6 +204,9 @@
        <spacer name="verticalSpacer_5">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Preferred</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
