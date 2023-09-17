@@ -6,8 +6,10 @@ from pytube import YouTube
 from threading import Thread
 import multiprocessing
 import threading
-from PyQt5.QtCore import QTimer, QThread, pyqtSignal, pyqtSlot
+from PyQt5.QtCore import QTimer, QThread, pyqtSignal, pyqtSlot, QObject
 from PyQt5.QtWidgets import *
+
+import sys  # Import the sys module
 
 
 def on_progress(stream, chunk, bytes_remaining):
@@ -30,6 +32,7 @@ class Play_list_download(QThread):
     download_complete = pyqtSignal()
     update_values_signal = pyqtSignal()
     downloaded_signal = pyqtSignal()
+    show_message_signal = pyqtSignal(str, str)
 
     def __init__(self, *args, **kwargs):
         super().__init__()
@@ -45,17 +48,8 @@ class Play_list_download(QThread):
         self.download_progress = True
 
     def run(self):
-        msg2 = QtWidgets.QMessageBox()
         try:
-            video_url = self.play_list_url
-            try:
-                video_url = YouTube(self.play_list_url, on_progress_callback=on_progress)
-            except Exception as link_error:
-                print(link_error)
-                # try :
-                #     Play_list_download().msg_exec("Warning" ," invalid URL ! " )
-                # except Exception as g :
-                #     print(g)
+            video_url = YouTube(self.play_list_url, on_progress_callback=on_progress)
 
             if self.video_type == "MP3":
                 video = video_url.streams.filter(only_audio=True).first()
@@ -99,6 +93,9 @@ class Play_list_download(QThread):
             self.download_complete.emit()
         except Exception as d:
             print("Error in Run", d)
+            # msg_execcc("Error", str(d))
+            # MessageHandler().show_message("Error", str(d))
+            self.show_message_signal.emit("Error", str(d))
             # try :
             #     Play_list_download().msg_exec("Warning" ," Invalid URL ! " )
             # except Exception as g :
@@ -125,11 +122,19 @@ class singleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         self.Play_List.update_values_signal.connect(self.update_Labels)
         self.counter = 0
         self.Play_List.downloaded_signal.connect(self.update_status)
+        self.Play_List.show_message_signal.connect(self.showErrors)
+
         # self.pushButton.clicked.connect(self.about_me)
 
         table_headers = ["Video Name", "Status"]
         self.tableWidget.setHorizontalHeaderLabels(table_headers)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
+        self.msg = QtWidgets.QMessageBox()
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icons/images/logo.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.msg.setWindowIcon(icon)
+        self.msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
 
     def start_download(self):
         msg = QtWidgets.QMessageBox()
@@ -241,11 +246,20 @@ class singleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         else:
             self.path_lbl.setText("Select Path .........")
 
+    def showErrors(self, title, text):
+        print("showErrors")
+        self.msg.setWindowTitle(str(title))
+        self.msg.setText(str(text))
+        self.msg.setIcon(QMessageBox.Critical)
+        self.msg.exec_()
+
 
 if __name__ == "__main__":
     import qdarkstyle
 
-    app = QtWidgets.QApplication([])
+    # app = QtWidgets.QApplication([])
+    app = QApplication(sys.argv)
+
     w = singleVideo_manger()
     w.show()
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
