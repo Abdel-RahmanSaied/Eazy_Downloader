@@ -2,7 +2,7 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtWidgets import QMessageBox
 from views_mangers.main_manger import MainManager
 from views_mangers.playList_manger import PlayList_manger
-from views_mangers.sigleView_manger import sigleVideo_manger
+from views_mangers.sigleView_manger import singleVideo_manger
 from views_mangers.search_manger import SearchManager
 
 
@@ -19,7 +19,7 @@ class Easy_Downloader(QtWidgets.QStackedWidget):
 
         self.main_manager = MainManager()
         self.playlist_manger = PlayList_manger()
-        self.singleVideo = sigleVideo_manger()
+        self.singleVideo = singleVideo_manger()
         self.search_manger = SearchManager()
 
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)

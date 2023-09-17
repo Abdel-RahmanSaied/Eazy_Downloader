@@ -17,6 +17,15 @@ def on_progress(stream, chunk, bytes_remaining):
     print(f"Downloaded {bytes_downloaded} bytes out of {total_size} bytes ({percentage:.2f}%)")
 
 
+def msg_exec(title, text):
+    msg = QtWidgets.QMessageBox()
+    msg.setWindowTitle(str(title))
+    msg.setText(str(text))
+    msg.setIcon(QMessageBox.Critical)
+    msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
+    msg.exec_()
+
+
 class Play_list_download(QThread):
     download_complete = pyqtSignal()
     update_values_signal = pyqtSignal()
@@ -34,14 +43,6 @@ class Play_list_download(QThread):
         self.progress_value = 0
 
         self.download_progress = True
-
-    def msg_exec(self, title, text):
-        msg = QtWidgets.QMessageBox()
-        msg.setWindowTitle(str(title))
-        msg.setText(str(text))
-        msg.setIcon(QMessageBox.Critical)
-        msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
-        msg.exec_()
 
     def run(self):
         msg2 = QtWidgets.QMessageBox()
@@ -72,7 +73,7 @@ class Play_list_download(QThread):
                 new_file = base + '.mp3'
                 counter = 2
                 while True:
-                    if os.path.exists(new_file) == True:
+                    if os.path.exists(new_file):
                         new_file = base + "-" + str(counter) + '.mp3'
                         counter += 1
                     else:
@@ -83,21 +84,21 @@ class Play_list_download(QThread):
                 new_file = base + '.mp4'
                 counter = 2
                 while True:
-                    if os.path.exists(new_file) == True:
+                    if os.path.exists(new_file):
                         new_file = base + "-" + str(counter) + '.mp4'
                         counter += 1
                     else:
                         break
                 os.rename(out_file, new_file)
 
-            self.video_status = " Downloded "
+            self.video_status = " Downloaded "
             self.progress_value = 100
             self.downloaded_signal.emit()
 
             self.download_progress = False
             self.download_complete.emit()
         except Exception as d:
-            print("xxxxxxxxffffffffx", d)
+            print("Error in Run", d)
             # try :
             #     Play_list_download().msg_exec("Warning" ," Invalid URL ! " )
             # except Exception as g :
@@ -110,10 +111,10 @@ class Play_list_download(QThread):
             #     print(msg_error)
 
 
-class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
+class singleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
     # checkAcceptedSignal = QtCore.pyqtSignal()
     def __init__(self):
-        super(sigleVideo_manger, self).__init__()
+        super(singleVideo_manger, self).__init__()
         self.setupUi(self)
         self.download_btn.clicked.connect(self.start_download)
         self.start_download = True
@@ -126,13 +127,13 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         self.Play_List.downloaded_signal.connect(self.update_status)
         # self.pushButton.clicked.connect(self.about_me)
 
-        table_headers = ["Video Name", "Video Description", "Status"]
+        table_headers = ["Video Name", "Status"]
         self.tableWidget.setHorizontalHeaderLabels(table_headers)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
     def start_download(self):
         msg = QtWidgets.QMessageBox()
-        if self.start_download == True:
+        if self.start_download:
             if len(self.link_lin.text()) > 8:
                 if self.path_lbl.text() != "Select Path .........":
                     try:
@@ -163,7 +164,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
                             except Exception as msg_error:
                                 print(msg_error)
                     except Exception as t:
-                        print("xxxxxxxxxx", t)
+                        print("error while starting the video", t)
 
                 else:
                     msg.setWindowTitle("Warning")
@@ -178,7 +179,7 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
                 msg.setStyleSheet('''font: 12pt "Acumin Pro";''')
                 msg.exec_()
 
-        elif self.stop_download == True:
+        elif self.stop_download:
             try:
                 print(self.Play_List.download_progress)
                 self.Play_List.download_progress = False
@@ -223,8 +224,8 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
             rowPosition = self.tableWidget.rowCount()
             self.tableWidget.insertRow(rowPosition)
             self.tableWidget.setItem(0, 0, QTableWidgetItem(str(self.Play_List.video_name)))
-            self.tableWidget.setItem(0, 1, QTableWidgetItem(str(self.Play_List.video_description)))
-            self.tableWidget.setItem(0, 2, QTableWidgetItem(str(self.Play_List.video_status)))
+            # self.tableWidget.setItem(0, 1, QTableWidgetItem(str(self.Play_List.video_description)))
+            self.tableWidget.setItem(0, 1, QTableWidgetItem(str(self.Play_List.video_status)))
 
         except Exception as T:
             print(T)
@@ -234,9 +235,9 @@ class sigleVideo_manger(QtWidgets.QWidget, sigleVideo_view.Ui_Form):
         self.progressBar.setValue(self.Play_List.progress_value)
 
     def select_path_to_save(self):
-        self.filepath_to_save = QFileDialog.getExistingDirectory(self, 'Hey! Select a path', "E:\\")
-        if len(self.filepath_to_save) != 0:
-            self.path_lbl.setText(self.filepath_to_save)
+        filepath_to_save = QFileDialog.getExistingDirectory(self, 'Hey! Select a path', "E:\\")
+        if len(filepath_to_save) != 0:
+            self.path_lbl.setText(filepath_to_save)
         else:
             self.path_lbl.setText("Select Path .........")
 
@@ -245,7 +246,7 @@ if __name__ == "__main__":
     import qdarkstyle
 
     app = QtWidgets.QApplication([])
-    w = sigleVideo_manger()
+    w = singleVideo_manger()
     w.show()
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     app.exec_()

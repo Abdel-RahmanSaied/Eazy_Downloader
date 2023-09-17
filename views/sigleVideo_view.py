@@ -30,7 +30,7 @@ class Ui_Form(object):
         self.tableWidget = QtWidgets.QTableWidget(self.frame)
         self.tableWidget.setStyleSheet("background-color: rgb(255, 255, 255, 0);")
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(2)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         self.gridLayout.addWidget(self.tableWidget, 3, 0, 1, 1)
